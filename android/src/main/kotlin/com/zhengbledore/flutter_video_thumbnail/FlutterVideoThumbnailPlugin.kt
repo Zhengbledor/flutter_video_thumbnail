@@ -115,6 +115,11 @@ class FlutterVideoThumbnailPlugin : FlutterPlugin, MethodCallHandler {
         }
 
         try {
+            val file = File(fullPath)
+            val parentFile = file.parentFile
+            if (parentFile != null && !parentFile.exists()) {
+                parentFile.mkdirs()
+            }
             val f = FileOutputStream(fullPath)
             f.write(bytes)
             f.close()
